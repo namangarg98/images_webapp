@@ -1,0 +1,137 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg">
+
+    <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto ">
+            <a class="navbar-brand col-xs-4 font-weight-bold font-italic " href="/">IMAGESMARKET</a>
+            <a class="btn btn-light my-2 my-sm-0 form-inline" href="aboutus/" role="button">About Us</a>
+            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </ul>
+        <div class="ml-auto form-inline">
+            <form class=" my-2 my-lg-0" method="GET" action='/search'>
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name='query'
+                    id='query'>
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            {% if user.is_authenticated %}
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Welcome {{request.user}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="logout/">Logout</a>
+                    </div>
+                </li>
+            </ul>
+            {% else %}
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-outline-light ml-2" data-toggle="modal" data-target="#loginmodal">
+                Login
+            </button>
+            <button type="button" class="btn btn-outline-light ml-2" data-toggle="modal" data-target="#signupmodal">
+                Sign up
+            </button>
+            {% endif %}
+        </div>
+        <!-- Login Modal -->
+        <div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" name="loginmodal"
+            aria-labelledby="loginmodal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginmodal">Login</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action='login/' method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="loginusername">Username</label>
+                                <input type="text" class="form-control" id="loginusername" name="loginusername"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Write your username (Lowercase or alphanumeric)" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="loginpass">Password</label>
+                                <input type="password" class="form-control" name="loginpass" id="loginpass"
+                                    placeholder="Write your password" required>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Modal -->
+        <div class="modal fade" id="signupmodal" tabindex="-1" role="dialog" name="signupmodal"
+            aria-labelledby="signupmodal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="signupmodal">Sign-up</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="signup/" method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="username"
+                                    placeholder="Write your username (Lowercase or alphanumeric)" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" id="fname" name="fname"
+                                    placeholder="Write your First name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lname">Last name</label>
+                                <input type="text" class="form-control" id="lname" name="lname"
+                                    placeholder="Write your Last name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    aria-describedby="emailHelp" placeholder="Write your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password1">Password</label>
+                                <input type="password" class="form-control" name="Password1" id="Password1"
+                                    placeholder="Write your password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password2">Confirm Password</label>
+                                <input type="password" class="form-control" id="Password2" name="Password2"
+                                    placeholder="Again write your password" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button id="close" type="button" class="btn btn-outline ml-2" data-toggle="modal"
+                                    data-target="#loginmodal">
+                                    Already a member,Login?
+                                </button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary">submit</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
